@@ -416,11 +416,10 @@ extern NSString * const RKObjectMappingNestingAttributeKeyName;
                     [predicateDeletionOperation addDependency:self.parentOperation];
                 }
 
-                // Ensure predicate deletion executes after any connections have been established
-                if (connectionOperation) [predicateDeletionOperation addDependency:connectionOperation];
-
                 [operationQueue addOperation:predicateDeletionOperation];
             }
+            // Ensure predicate deletion executes after any connections have been established
+            if (connectionOperation) [predicateDeletionOperation addDependency:connectionOperation];
             [predicateDeletionOperation addEntityMapping:(RKEntityMapping *)mappingOperation.objectMapping];
         }
     }
